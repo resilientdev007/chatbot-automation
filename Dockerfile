@@ -13,6 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install the SpaCy model
 RUN python -m spacy download en_core_web_sm
 
+# Set HEADLESS_MODE to False by default
+ENV HEADLESS_MODE=True
+
 # Make port 80 available to the world outside this container
 EXPOSE 80
 

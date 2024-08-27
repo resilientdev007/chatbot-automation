@@ -5,12 +5,13 @@ This framework automates interactions with the Mistral chatbot, validating respo
 ## Prerequisites
 
 - Python 3.12.4 or higher
+- Playwright
 - Docker (optional)
 
 ## Installation
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/your-username/chatbot-automation.git
+   git clone https://github.com/resilientdev007/chatbot-automation.git
    
    cd chatbot-automation
 
@@ -52,6 +53,9 @@ Ensure that the Excel sheet with questions and expected answers is placed in the
 1. **Build the Docker image**:
     ```sh
     docker build -t chatbot-automation .
+OR
+    
+        docker pull tarrunkhosla/  chatbot-automation:v1
 
 2. **Run the Docker container**:
     ```sh
