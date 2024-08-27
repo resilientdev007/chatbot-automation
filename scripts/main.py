@@ -11,7 +11,12 @@ from validation import validate_response, validate_expected_data, generate_repor
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load the configuration from the config.yaml file
-config_path = os.path.join('../config', 'config.yaml')
+# config_path = os.path.join('../config', 'config.yaml')
+config_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'config', 'config.yaml')
+
+
+# Set headless mode from environment variable, default to False
+headless_mode = os.getenv('HEADLESS_MODE', 'False').lower() in ['true', '1', 'yes']
 
 with open(config_path, 'r') as file:
     config = yaml.safe_load(file)
@@ -144,7 +149,7 @@ async def main():
         results = []
 
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=False)
+            browser = await p.chromium.launch(headless=headless_mode)
             page = await browser.new_page()
             await page.goto("https://chat.mistral.ai/chat")
 

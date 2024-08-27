@@ -23,8 +23,14 @@ This framework automates interactions with the Mistral chatbot, validating respo
     ```sh
     pip install -r requirements.txt
     python -m spacy download en_core_web_sm
+
+4. **Install Playwright and the necessary browser:**
+    ```python
+    pip install playwright
+    playwright install
+
     
-4. **Set up environment variables for the chatbot (Mistral Bot) credentials**:
+5. **Set up environment variables for the chatbot (Mistral Bot) credentials**:
      ```sh
     export CHATBOT_USERNAME=your_username
     export CHATBOT_PASSWORD=your_password
