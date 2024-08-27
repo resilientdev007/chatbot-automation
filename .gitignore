@@ -1,0 +1,22 @@
+# Ignore the git directory itself
+.git/
+
+# Ignore the environment directory
+myenv/
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore log files
+*.log
+
+# Ignore reports directory
+reports/
+
+# Ignore temporary files (if any)
+*~
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
