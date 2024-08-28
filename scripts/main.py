@@ -9,16 +9,7 @@ from playwright.async_api import async_playwright
 from validation import validate_response, validate_expected_data, generate_report
 
 # Set up logging
-#logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("app/scripts/model.log"),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load the configuration from the config.yaml file
 # config_path = os.path.join('../config', 'config.yaml')
@@ -151,7 +142,8 @@ async def main():
             return
         
         # Read questions from Excel
-        questions_df = pd.read_excel("../data/questions.xlsx")
+        questions_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'data', 'questions.xlsx')
+        questions_df = pd.read_excel(questions_path)
         questions = questions_df["Question"].tolist()
         expected_answers = questions_df["Expected Answer"].tolist()
         expected_data = questions_df["Expected Data"].tolist()
@@ -190,8 +182,9 @@ async def main():
 
         # Convert results to DataFrame and print or save
         results_df = pd.DataFrame(results)
-        _write_results('../reports/reports.xlsx', results, sheet_name='Score')
-        generate_report(results_df, output_path='../reports/reports.xlsx', sheet_name='Metrics')
+        result_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'reports', 'reports.xlsx')
+        _write_results(result_path, results, sheet_name='Score')
+        generate_report(results_df, output_path=result_path, sheet_name='Metrics')
     except Exception as e:
         logging.error(f"Error in main function: {e}")
         raise
