@@ -55,7 +55,7 @@ Ensure that the Excel sheet with questions and expected answers is placed in the
     docker build -t chatbot-automation .
 OR
     
-        docker pull tarrunkhosla/  chatbot-automation:v1
+    docker pull tarrunkhosla/chatbot-automation:v2
 
 2. **Run the Docker container**:
     ```sh

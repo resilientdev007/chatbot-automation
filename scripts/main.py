@@ -4,11 +4,21 @@ import asyncio
 import logging
 import os
 import yaml
+import sys
 from playwright.async_api import async_playwright
 from validation import validate_response, validate_expected_data, generate_report
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+#logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("app/scripts/model.log"),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 
 # Load the configuration from the config.yaml file
 # config_path = os.path.join('../config', 'config.yaml')
