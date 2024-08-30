@@ -89,6 +89,8 @@ Ensure that the Excel sheet with questions and expected answers is placed in the
     ![](screenshots/docker_pull.gif)
 
 2. **Run the Docker container**:
+    Make sure you have a reports directory in your local
+
     (when building locally)
     ```sh
     docker run -e CHATBOT_USERNAME=your_username -e CHATBOT_PASSWORD=your_password -v $(pwd)/reports:/app/reports -it chatbot-automation
