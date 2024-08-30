@@ -73,43 +73,6 @@ def _extract_keywords(text):
         logging.error(f"Error extracting keywords: {e}")
         raise
 
-# def validate_response(expected_answer, actual_response):
-#     """
-#     Validate the response by calculating various similarity metrics.
-
-#     Args:
-#         expected_answer (str): The expected answer.
-#         actual_response (str): The actual response.
-
-#     Returns:
-#         tuple: A tuple containing similarity scores and match indicators.
-#     """
-#     try:
-#         # Extract keywords for single text pairs
-#         actual_keywords = _extract_keywords(actual_response)
-#         expected_keywords = _extract_keywords(expected_answer)
-
-#         # Calculate similarity score for the pair using BERT-based similarity
-#         similarity_score = _calculate_similarity(expected_answer, actual_response)
-
-#         # Compute keyword match
-#         keyword_match = len(expected_keywords.intersection(actual_keywords)) / len(expected_keywords) >= 0.3
-
-#         # Fuzzy match
-#         fuzzy_score = fuzz.ratio(expected_answer.lower(), actual_response.lower())
-#         fuzzy_match = fuzzy_score >= 70  # Adjust threshold as needed
-
-#         # Levenshtein similarity
-#         levenshtein_similarity = _calculate_levenshtein_similarity(expected_answer, actual_response)
-
-#         # Combined score (you can adjust the weights as needed)
-#         combined_score = (similarity_score + keyword_match + fuzzy_match + levenshtein_similarity) / 4
-
-#         return similarity_score, keyword_match, fuzzy_score, fuzzy_match, levenshtein_similarity, combined_score
-#     except Exception as e:
-#         logging.error(f"Error validating response: {e}")
-#         raise
-
 def validate_response(expected_answer, actual_response, config):
     """
     Validate the response by calculating various similarity metrics.
@@ -189,7 +152,7 @@ def generate_report(results_df, output_path, sheet_name):
         actual_labels = [1 if row['Keyword Match'] and row['Fuzzy Match'] and row['Expected Data Match'] else 0 for row in results_df.to_dict('records')]
         predicted_labels = [1 if row['Keyword Match'] or row['Fuzzy Match'] or row['Expected Data Match'] else 0 for row in results_df.to_dict('records')]
 
-        # Calculate metrics
+        # Calculate metrics - Might be used for different self developed bot
         accuracy = accuracy_score(actual_labels, predicted_labels)
         precision = precision_score(actual_labels, predicted_labels, zero_division=0)
         recall = recall_score(actual_labels, predicted_labels, zero_division=0)

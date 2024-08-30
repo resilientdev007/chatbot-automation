@@ -116,7 +116,7 @@ def _write_results(file_path, data, sheet_name):
     """
     try:
         # Create a DataFrame from the results
-        df = pd.DataFrame(data, columns=['Question', 'Actual Answer', 'Expected Answer', 'Similarity Score', 'Keyword Match', 'Fuzzy Score', 'Fuzzy Match', 'Expected Data Match', 'Levenshtein Similarity', 'Combined Score'])
+        df = pd.DataFrame(data, columns=['Question', 'Actual Answer', 'Expected Answer', 'Similarity Score', 'Keyword Match', 'Fuzzy Score', 'Fuzzy Match', 'Levenshtein Similarity','Expected Data Match', 'Combined Score'])
         # Write the DataFrame to an Excel file
         with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
             df.to_excel(writer, sheet_name=sheet_name, index=False)
@@ -174,8 +174,9 @@ async def main():
                     'Fuzzy Score': fuzzy_score,
                     'Fuzzy Match': fuzzy_match,
                     'Levenshtein Similarity': levenshtein_similarity,
+                    'Expected Data Match': expected_data_match,
                     'Combined Score': combined_score,
-                    'Expected Data Match': expected_data_match
+                    
                 })
 
             await browser.close()

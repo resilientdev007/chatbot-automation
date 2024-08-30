@@ -14,30 +14,54 @@ This framework automates interactions with the Mistral chatbot, validating respo
    git clone https://github.com/resilientdev007/chatbot-automation.git
    
    cd chatbot-automation
+    ```
+
+    ![](screenshots/gitclone.gif)
 
 2. **Set up Python Virtual Environment (Optional but highly recommended)**
     ```
     python -m venv myenv
+    ```
+    For Windows
+    ```
     activate venv
-
+    ```
+    For Linux
+    ```
+    source myenv/bin/activate
+    ```
+    ![](screenshots/activate_env_linux.gif)
+    
 3. **Install the required dependencies**:
     ```sh
     pip install -r requirements.txt
     python -m spacy download en_core_web_sm
+    ```
+    ![](screenshots/pip_install.gif)
 
 4. **Install Playwright and the necessary browser:**
     ```python
     pip install playwright
     playwright install
+    ```
 
+    ![](screenshots/playwright_install.gif)
     
 5. **Set up environment variables for the chatbot (Mistral Bot) credentials**:
+    For Linux
      ```sh
     export CHATBOT_USERNAME=your_username
     export CHATBOT_PASSWORD=your_password
-
+    export HEADLESS_MODE=True (optional , by default set to False in code and set to True for Docker)
+    ```
+    For Windows
+    ```sh
     set CHATBOT_USERNAME=your_username
     set CHATBOT_PASSWORD=your_password
+    set HEADLESS_MODE=True (optional , by default set to False in code and set to True for Docker)
+    ```
+
+    ![](screenshots/set_env.gif)
 
 ## Usage
 
@@ -47,19 +71,33 @@ Ensure that the Excel sheet with questions and expected answers is placed in the
     ```sh
     cd scripts
     python main.py
+    ```
+    ![](screenshots/main.gif)
+    ![](screenshots/main1.gif)
 
 ## Docker Setup (Optional)
 
 1. **Build the Docker image**:
     ```sh
     docker build -t chatbot-automation .
-OR
-    
-    docker pull tarrunkhosla/chatbot-automation:v2
+    ```
+    ![](screenshots/docker_build.gif)
+    OR
+    ```sh
+    docker pull tarrunkhosla/chatbot-automation:v4
+    ```
+    ![](screenshots/docker_pull.gif)
 
 2. **Run the Docker container**:
+    (when building locally)
     ```sh
-    docker run -e CHATBOT_USERNAME=your_username -e CHATBOT_PASSWORD=your_password -v $(pwd)/reports:/app/reports chatbot-automation
+    docker run -e CHATBOT_USERNAME=your_username -e CHATBOT_PASSWORD=your_password -v $(pwd)/reports:/app/reports -it chatbot-automation
+    ```
+    OR (in case you pulled the image)
+    ```sh
+    docker run -e CHATBOT_USERNAME=your_username -e CHATBOT_PASSWORD=your_password -v $(pwd)/reports:/app/reports it tarrunkhosla/chatbot-automation:v4
+
+    ![](screenshots/docker_run.gif)
 
 ## Configuration
 
